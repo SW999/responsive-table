@@ -1,0 +1,271 @@
+html {
+  font-size: 10px;
+}
+
+body {
+  margin: 0;
+  padding: 2.5rem;
+  color: #1f1f1f;
+  font: 1.4rem/1.42857143 "Roboto", Arial, Helvetica, sans-serif;
+}
+
+h1 {
+  margin: 0 0 1rem 0;
+  color: rgba(0, 0, 0, .87);
+  font-size: 2.5rem;
+  line-height: 3rem;
+}
+
+/* custom input */
+.control-checkbox {
+  display: block;
+  position: relative;
+  padding: 0.7rem;
+  font-size: 18px;
+
+  input {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+
+    &:checked {
+      ~ .control-indicator {
+        background-color: #00bcd4;
+        border: 2px solid #00bcd4;
+
+        &:after {
+          opacity: 1;
+          transform: rotate(45deg) scale(1);
+        }
+      }
+    }
+
+    &:disabled {
+      ~ .control-indicator {
+        border-color: #ccc;
+        cursor: not-allowed;
+      }
+    }
+
+    &:checked:disabled ~ .control-indicator {
+      background-color: #ccc;
+      border: 2px solid #ccc;
+    }
+  }
+
+  .control-indicator {
+    position: absolute;
+    height: 1.6rem;
+    width: 1.6rem;
+    border: 2px solid #000;
+    border-radius: 2px;
+    background-color: transparent;
+    transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+    cursor: pointer;
+
+    &:after {
+      content: '';
+      position: absolute;
+      opacity: 0;
+      left: 0.5rem;
+      top: 0;
+      width: 0.5rem;
+      height: 1rem;
+      border: solid #fff;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg) scale(0);
+      transition: all 550ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+    }
+
+    @media only screen and (max-width: 760px), (min-width: 768px) and (max-width: 1024px) {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    @media only screen and (min-width: 1025px) {
+      top: 50%;
+      left: 50%;
+      transform: translateX(-50%) translateY(-50%);
+    }
+  }
+}
+
+/* responsive table */
+.material-responsive-table {
+  margin-bottom: 2rem;
+  border: medium none;
+  border-collapse: collapse;
+  border-spacing: 0;
+
+  td, th {
+    display: table-cell;
+    text-align: left;
+    vertical-align: middle;
+  }
+
+  th {
+    text-transform: uppercase;
+
+    &:empty {
+      height: 4rem;
+      padding: 0;
+    }
+  }
+
+  td {
+    &.name {
+      color: #007bde;
+      font-size: 1.5rem;
+    }
+  }
+
+  &.striped > tbody > tr:nth-child(2n+1),
+  &:not(.striped) > tbody > tr:hover {
+    background-color: #eaeaea;
+  }
+}
+
+@media only screen and (max-width: 760px), (min-width: 768px) and (max-width: 1024px) {
+  .material-responsive-table {
+    display: flex;
+    vertical-align: top;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    background: none;
+
+    thead {
+      display: flex;
+      flex-shrink: 0;
+      min-width: min-content;
+      border-right: 1px solid #b5b5b5;
+    }
+
+    tbody {
+      display: flex;
+      position: relative;
+      overflow-x: auto;
+      overflow-y: hidden;
+
+      background: radial-gradient(ellipse at left, rgba(0, 0, 0, .2) 0%, rgba(0, 0, 0, 0) 75%) 0 center, radial-gradient(ellipse at right, rgba(0, 0, 0, .2) 0%, rgba(0, 0, 0, 0) 75%) 100% center;
+      background-size: 10px 100%, 10px 100%;
+      background-attachment: scroll, scroll;
+      background-repeat: no-repeat;
+      -webkit-overflow-scrolling: touch;
+
+      tr:first-child {
+        background-image: linear-gradient(to right, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 0) 100%);
+        background-repeat: no-repeat;
+        background-size: 20px 100%;
+      }
+
+      tr:last-child {
+        background-image: linear-gradient(to left, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 0) 100%);
+        background-repeat: no-repeat;
+        background-position: 100% 0;
+        background-size: 20px 100%;
+      }
+    }
+
+    tr {
+      display: flex;
+      flex-direction: column;
+      min-width: min-content;
+      flex-shrink: 0;
+    }
+
+    td, th {
+      display: block;
+      padding: 1rem 0.7rem;
+    }
+
+    td {
+      border-left: 0;
+      text-align: center;
+      background-image: none !important;
+    }
+  }
+}
+
+@media only screen and (min-width: 1025px) {
+  .material-responsive-table {
+    position: relative;
+    display: inline-block;
+    max-width: 100%;
+    vertical-align: top;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+
+    /* optional - looks better for small cell values*/
+    white-space: nowrap;
+
+    background: radial-gradient(ellipse at left, rgba(0, 0, 0, .2) 0%, rgba(0, 0, 0, 0) 75%) 0 center, radial-gradient(ellipse at right, rgba(0, 0, 0, .2) 0%, rgba(0, 0, 0, 0) 75%) 100% center;
+    background-size: 10px 100%, 10px 100%;
+    background-attachment: scroll, scroll;
+    background-repeat: no-repeat;
+    z-index: 50;
+
+    thead {
+      border-bottom: 1px solid #b5b5b5;
+
+      th {
+        &:first-child {
+          position: relative;
+          z-index: 51;
+          background-image: linear-gradient(to right, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 0) 100%);
+          background-repeat: no-repeat;
+          background-size: 20px 100%;
+        }
+
+        &:last-child {
+          position: relative;
+          z-index: 51;
+          background-image: linear-gradient(to left, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 0) 100%);
+          background-repeat: no-repeat;
+          background-position: 100% 0;
+          background-size: 20px 100%;
+        }
+      }
+    }
+
+    tbody {
+      tr {
+        border-bottom: 1px solid #e0e0e0;
+      }
+
+      td:first-child {
+        position: relative;
+        z-index: 51;
+        background-image: linear-gradient(to right, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 0) 100%);
+        background-repeat: no-repeat;
+        background-size: 20px 100%;
+      }
+
+      td:last-child {
+        position: relative;
+        z-index: 51;
+        background-image: linear-gradient(to left, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 0) 100%);
+        background-repeat: no-repeat;
+        background-position: 100% 0;
+        background-size: 20px 100%;
+      }
+    }
+
+    tr {
+      &:hover td:first-child {
+        background-image: linear-gradient(to right, rgba(234, 234, 234, 1) 50%, rgba(234, 234, 234, 0) 100%);
+      }
+
+      &:hover td:last-child {
+        background-image: linear-gradient(to left, rgba(234, 234, 234, 1) 50%, rgba(234, 234, 234, 0) 100%);
+        background-position: 100% 0;
+      }
+    }
+
+    td, th {
+      height: 4.8rem;
+      padding: 0.1rem 1.5rem;
+      font-size: 1.3rem;
+    }
+  }
+}
